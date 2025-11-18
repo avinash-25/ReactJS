@@ -1,9 +1,11 @@
-import Parent from "./Parent";
+import Card from "./Card";
 
 const Body = () => {
   return (
     <div>
-      <Parent></Parent>
+      <div className="center-container" >
+          <Card></Card>
+      </div>
     </div>
   );
 };
