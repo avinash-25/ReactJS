@@ -108,3 +108,7 @@ How to use react element in component
 - If we have to send number or anything then we have to use javascript environment `{}`
 
 \*\*If we dont pass the any value to the props then by default it will send the `empty object`.
+
+![alt text](<WhatsApp Image 2025-11-18 at 14.18.13.jpeg>)
+
+![alt text](<WhatsApp Image 2025-11-18 at 14.18.15.jpeg>)
