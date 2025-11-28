@@ -1,4 +1,4 @@
-## What er dont use
+## What er dont use in JSX
 
 1. if
 2. else
@@ -168,3 +168,7 @@ useEffect(() => {
 - then API call (here they wait for some second because UI freezes)
 - then after redner the UI
   (Shimmer UI) - At initial render the webpage not completly loaded. For some initial time the dummy UI represents there.
+
+  cors :
+
+  CORS protects users by blocking cross-site requests unless the server clearly says “I allow this origin.”

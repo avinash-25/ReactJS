@@ -45,17 +45,17 @@ let config = [
   },
 ];
 
-app.use(cors());
+
 app.use(express.json());
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+  allowedHeaders: ["Content-Type", "credentials"]
+}));
 
 // preflight request
 app.use((req, res, next) => {
-  
-  res.set({
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,POST,DELETE",
-      "Access-Control-Allow-Headers": "Content-Type",
-  });
   
   if(req.method === "OPTIONS")
   {
@@ -66,12 +66,12 @@ app.use((req, res, next) => {
   next()
 });
 
-app.get("/api/products", (req, res) => {
+app.get("/api/products", cors(), (req, res) => {
   
   res.status(200).json(config);
 });
 
-app.post("/api/products", (req, res) => {
+app.post("/api/products",cors(), (req, res) => {
   const newProduct = req.body;
   console.log("Post Request");
   config.push(newProduct);
@@ -79,7 +79,7 @@ app.post("/api/products", (req, res) => {
   res.status(201).json({ msg: "Product added successfully" });
 });
 
-app.delete("/api/products/:id", (req, res) => {
+app.delete("/api/products/:id",cors(), (req, res) => {
   const id = +req.params.id;
   config = config.filter((element) => element.id !== id);
  

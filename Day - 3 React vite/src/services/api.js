@@ -14,8 +14,6 @@ export const getProducts = async (endPoint) => {
         return await response.json();   
 }
 
-
-
 export const postProducts = async (endPoint, data) =>{
         const response = await fetch(`${BASE_URL}${endPoint}`,{
                 method:"POST",
@@ -28,7 +26,6 @@ export const postProducts = async (endPoint, data) =>{
             return await response.json();
 }
 
-
 export const deleteProduct = async (endPoint,id) => {
     const response = await fetch(`${BASE_URL}${endPoint}/${id}`,{
         method:"DELETE"
@@ -36,5 +33,6 @@ export const deleteProduct = async (endPoint,id) => {
 
     return await response.json();
 }
+
 
 
