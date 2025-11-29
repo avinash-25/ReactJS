@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 const app = express();
 dotenv.config();
-import cors from 'cors';
 
 const PORT = process.env.PORT || 5000;
 
@@ -45,17 +45,47 @@ let config = [
   },
 ];
 
-
 app.use(express.json());
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
-  allowedHeaders: ["Content-Type", "credentials"]
-}));
 
-// preflight request
+app.use(cors({
+  origin:"http://localhost:5173",
+  methods: ["GET","POST", "DELETE", "PATCH","PUT"],
+  allowedHeaders: ["Content-Type", "credentials"]
+}))
+
+
+app.get("/api/products", (req, res) => {
+ 
+  res.status(200).json(config);
+});
+
+app.post("/api/products", (req, res) => {
+  const newProduct = req.body;
+  config.push(newProduct);
+
+  res.status(201).json({ msg: "Product added successfully" });
+});
+
+app.delete("/api/products/:id", (req, res) => {
+  const id = +req.params.id;
+  config = config.filter((element) => element.id !== id);
+
+  res.status(200).json({ msg: "Product deleted successfully" });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
+
+/* preflight request
 app.use((req, res, next) => {
+  
+  res.set({
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,POST,DELETE",
+      "Access-Control-Allow-Headers": "Content-Type",
+  });
   
   if(req.method === "OPTIONS")
   {
@@ -65,26 +95,4 @@ app.use((req, res, next) => {
 
   next()
 });
-
-app.get("/api/products", cors(), (req, res) => {
-  
-  res.status(200).json(config);
-});
-
-app.post("/api/products",cors(), (req, res) => {
-  const newProduct = req.body;
-  console.log("Post Request");
-  config.push(newProduct);
-
-  res.status(201).json({ msg: "Product added successfully" });
-});
-
-app.delete("/api/products/:id",cors(), (req, res) => {
-  const id = +req.params.id;
-  config = config.filter((element) => element.id !== id);
- 
-  res.status(200).json({ msg: "Product deleted successfully" });
-});
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+*/

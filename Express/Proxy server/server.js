@@ -1,44 +1,40 @@
-require('dotenv').config();
-const express = require('express');
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const cors = require('cors');
-
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 const app = express();
+
+
+// Start server
+const PORT = process.env.PORT || 9000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Configuration
-const PORT = process.env.PORT || 8080;
-const TARGET = process.env.TARGET || 'http://localhost:9000';
-const PREFIX = process.env.PREFIX || '/api';
+app.use("/path",async (req,res)=>{
 
-// Basic health-check
-app.get('/', (req, res) => {
-  res.json({ message: 'Proxy server is running', target: TARGET, prefix: PREFIX });
-});
+  console.log("Proxy Server is Running");
+  const {url} = req?.query;  
+  console.log("url:",url);
 
-// Create proxy middleware for matching PREFIX.
-// All requests to /api/* will be forwarded to TARGET with the path preserved.
-app.use(
-  PREFIX,
-  createProxyMiddleware({
-    target: TARGET,
-    changeOrigin: true,
-    pathRewrite: (path, req) => path.replace(new RegExp(`^${PREFIX}`), ''),
-    onProxyReq: (proxyReq, req, res) => {
-      // Example: attach a header for downstream servers if needed
-      proxyReq.setHeader('X-Forwarded-By', 'proxy-server');
-    },
-    logLevel: 'debug'
-  })
-);
+  const fetchData = async(url)=>{
+    const response = await fetch(url)
+    return await response.json();
+  }
 
-// Fallback route
-app.use((req, res) => {
-  res.status(404).json({ error: 'Not found by proxy' });
-});
+  const result = await fetchData(url);
+  
+  res.status(200).send(JSON.stringify(result));
+})
+
 
 app.listen(PORT, () => {
-  console.log(`Proxy server listening on http://localhost:${PORT}`);
-  console.log(`Proxying ${PREFIX} -> ${TARGET}`);
+  console.log(`Proxy server is running on http://localhost:${PORT}`);
 });
+
+
+/*
+1. Proxy server is running on http://localhost:${PORT}
+2. Proxy Server is Running
+3. url = http://localhost:3000/api/products
+*/ 

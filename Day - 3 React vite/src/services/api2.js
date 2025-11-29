@@ -1,21 +1,17 @@
-import axios from 'axios';
+import axios from "axios";
+
+
+// GET Request
+/**
+ *   Basic Axios
+ *   Axios Instance
+ *   Axios Interceptors
+ */
 
 const BASE_URL = "http://localhost:4000";
 
-export const getProducts = async (endpoint) => {
-    const {data} = await axios.get(`${BASE_URL}${endpoint}`)
-    
-    return data;
-    
-    // console.log("Response : ", response);
-    
+export const getProducts = async (endPoint) =>{
+   const {data} = await axios.get(`${BASE_URL}${endPoint}`);
+   console.log("data:",data);
+   return data;
 }
-
-
-/*
-response = {
-        data: [],
-        config: {},
-        stattus: 200,
-        and many more things are came in response.
-    } */
