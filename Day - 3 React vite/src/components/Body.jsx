@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import Shimmer from "./Shimmer";
-import {
-  postProducts,
-  deleteProduct,
-  getProducts,
-  replaceProduct,
-} from "../services/api2";
+import {postProducts, deleteProduct, getProducts} from "../services/api2";
+import { replaceProduct } from "../services/api";
+
+
 
 const Body = () => {
   const [productList, setProductList] = useState([]);
-
-  // Fetch Products
   const load = async () => {
     const products = await getProducts("/api/products");
     setProductList(products);
@@ -21,13 +17,14 @@ const Body = () => {
     load();
   }, []);
 
-  // POST Product
+  
+  //! POST Product
+  
   const handlePost = async () => {
     const newProduct = {
-      id: 5,
+      id: 1,
       name: "Air Buds",
-      image:
-        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSA7rusF9rOr-xyMlncnq7MM9VBQQNJWqDIVlzWhjE2-80Telk9H_3kWjaxeC9RSHPu0goCtBCdnHLffw_dsSfFHU-xcWF6w3lCfK5g85nfWHUUG46H-9KA0A",
+      image: "https://img-prd-pim.poorvika.com/product/apple-airpods-4-gen-with-usb-c-charging-case-white-front-view.png",
       price: 11900,
       description: "Apple AirPods Pro with MagSafe Charging Case",
       rating: 4.7,
@@ -44,21 +41,22 @@ const Body = () => {
     console.log(msg);
     load();
   };
-const replaceProd = {
-      id: 10,
-      name: "Air Buds",
-      image:
-        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSA7rusF9rOr-xyMlncnq7MM9VBQQNJWqDIVlzWhjE2-80Telk9H_3kWjaxeC9RSHPu0goCtBCdnHLffw_dsSfFHU-xcWF6w3lCfK5g85nfWHUUG46H-9KA0A",
-      price: 11900,
-      description: "Apple AirPods Pro with MagSafe Charging Case",
-      rating: 4.7,
-    };
+
   // PUT / REPLACE Product
   const handleReplace = async () => {
-    const message = await replaceProduct("/api/products", 1, replaceProd);
-    console.log(message);
-    load();
-  };
+      const newProduct = {
+                      id: 1,
+                      name: "Air Buds",
+                      image:
+                        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSA7rusF9rOr-xyMlncnq7MM9VBQQNJWqDIVlzWhjE2-80Telk9H_3kWjaxeC9RSHPu0goCtBCdnHLffw_dsSfFHU-xcWF6w3lCfK5g85nfWHUUG46H-9KA0A",
+                      price: 11900,
+                      description: "Apple AirPods Pro with MagSafe Charging Case",
+                      rating: 4.7,
+                    }
+       const msg = await replaceProduct("/api/products",1,newProduct )
+       console.log("msg:",msg);
+       load()
+    }
 
   return (
     <>

@@ -1,5 +1,7 @@
 const BASE_URL = "http://localhost:4000";
 
+//! Get product 
+
 export const getProducts = async (endPoint) => {
   const response = await fetch(
     `http://localhost:9000/path?url=${BASE_URL}${endPoint}`,
@@ -14,6 +16,8 @@ export const getProducts = async (endPoint) => {
   return await response.json();
 };
 
+//! Add product
+
 export const postProducts = async (endPoint, data) => {
   const response = await fetch(`${BASE_URL}${endPoint}`, {
     method: "POST",
@@ -26,6 +30,8 @@ export const postProducts = async (endPoint, data) => {
   return await response.json();
 };
 
+//! delete product
+
 export const deleteProduct = async (endPoint, id) => {
   const response = await fetch(`${BASE_URL}${endPoint}/${id}`, {
     method: "DELETE",
@@ -33,3 +39,17 @@ export const deleteProduct = async (endPoint, id) => {
   return await response.json();
 };
 
+
+//! replace product
+
+export const replaceProduct = async (endPoint,id,obj)=>{
+  const response = await fetch(`${BASE_URL}${endPoint}/${id}`,{
+    method:'PUT',
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(obj)
+  })
+
+  return await response.json();
+}
