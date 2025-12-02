@@ -1,7 +1,7 @@
 export const config = [
         {
                 id: 1,
-                name: "Wireless Headphones",
+                name: "Wireless Headphone",
                 image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSTNAfetK5tQUOD3fbJsac-          tSnyt2_tCgBihLjyS0E5ANabnL77pLcbxtTmKtqUgmkLNnKdU65jjIV6-uWweQlzcfFjol0MpqubgqL71EEiG-4lvfMtrQUUXA",
                 price: 59.99,
                 description: "High-quality wireless headphones with noise cancellation.",

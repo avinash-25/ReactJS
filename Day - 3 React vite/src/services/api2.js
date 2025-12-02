@@ -1,39 +1,32 @@
 import axios from "axios";
 
-
-// GET Request
-/**
- *   Basic Axios
- *   Axios Instance
- *   Axios Interceptors
- */
-
-//Instabce
+//! Axios Instance
 
 const app = axios.create({
-   baseURL: "http://localhost:4000",
-   headers: {
-      "Content-Type": "application/json"
-   },
-   timeout: 5000
-})
+  baseURL: "http://localhost:4000",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  timeout: 5000,
+});
 
 
-//! get request
+//! GET Request
 
-export const getProducts = async (endPoint) =>{
-   const {data} = await app.get(endPoint);
-   return data;
-}
+export const getProducts = async (endPoint) => {
+  const { data } = await app.get(endPoint);
+  return data;
+};
 
-//! post request
+//! POST product
 
-export const postProducts = async (endPoint,obj) =>{
-   const { data } = await app.post(endPoint, JSON.stringify(obj));
-   return data;
-}
+export const postProducts = async (endPoint, obj) => {
+  const { data } = await app.post(endPoint, obj); // No JSON.stringify needed
+  return data;
+};
 
-//! delete request
+
+//! Delete product
 
 export const deleteProduct = async (endPoint, id) => {
   const { data } = await app.delete(`${endPoint}/${id}`);
@@ -41,11 +34,18 @@ export const deleteProduct = async (endPoint, id) => {
 };
 
 
-//! PUT request
+//! PUT Request (Replace Entire Resource)
 
 export const replaceProduct = async (endPoint, id, obj) => {
-   const response = await fetch(`${baseURL}${endPoint}/${id}`, {
-      method: PUT,
-      
-   })
-}
+   const { data } = await app.put(`${endPoint}/${id}`, obj);
+   console.log("product replaced successfully");
+  return data;
+};
+
+
+//! PATCH Request (Update Partial Resource)
+
+export const updateProduct = async (endPoint, id, obj) => {
+  const { data } = await app.patch(`${endPoint}/${id}`, obj);
+  return data;
+};

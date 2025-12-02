@@ -5,7 +5,7 @@ const app = express();
 
 
 // Start server
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());
