@@ -26,6 +26,11 @@ export const postProducts = async (endPoint,obj) => {
 }
 
 export const deleteProduct = async (endPoint,id) => {
-   const {data} = await app.delete(`${endPoint}/${5}`);  
+   const {data} = await app.delete(`${endPoint}/${id}`);  
+   return data;
+}
+
+export const updateProduct = async (endPoint, id) => {
+   const { data } = await app.patch(`${endPoint}/${id}`); 
    return data;
 }

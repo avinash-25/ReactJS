@@ -43,20 +43,24 @@ const Body = () => {
   };
 
   // PUT / REPLACE Product
-  const handleReplace = async () => {
-      const newProduct = {
-                      id: 1,
-                      name: "Air Buds",
-                      image:
-                        "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSA7rusF9rOr-xyMlncnq7MM9VBQQNJWqDIVlzWhjE2-80Telk9H_3kWjaxeC9RSHPu0goCtBCdnHLffw_dsSfFHU-xcWF6w3lCfK5g85nfWHUUG46H-9KA0A",
-                      price: 11900,
-                      description: "Apple AirPods Pro with MagSafe Charging Case",
-                      rating: 4.7,
-                    }
-       const msg = await replaceProduct("/api/products",1,newProduct )
-       console.log("msg:",msg);
-       load()
-    }
+const handleReplace = async () => {
+   const newProduct = {
+        id: 1,
+        name: "Air Buds",
+        image:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSA7rusF9rOr-xyMlncnq7MM9VBQQNJWqDIVlzWhjE2- 80Telk9H_3kWjaxeC9RSHPu0goCtBCdnHLffw_dsSfFHU-xcWF6w3lCfK5g85nfWHUUG46H-9KA0A",
+        price: 11900,
+        description: "Apple AirPods Pro with MagSafe Charging Case",
+        rating: 4.7,
+      }
+const msg = await replaceProduct("/api/products",1,newProduct )
+console.log("msg:",msg);
+load()
+}
+  
+  const handleUpdate = async () => {
+    const description = { description: "Bla Bla Bla" };
+
+  }
 
   return (
     <>
@@ -75,6 +79,7 @@ const Body = () => {
           <button onClick={handlePost}>POST</button>
           <button onClick={handleDelete}>DELETE</button>
           <button onClick={handleReplace}>REPLACE</button>
+          <button onClick={handleUpdate}>UPDATE</button>
         </div>
       </div>
     </>

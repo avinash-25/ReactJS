@@ -78,6 +78,13 @@ app.put("/api/products/:id",(req,res) =>{
   const id  = +req.params.id;
   const index = config.findIndex(element => element.id === id);
   config[0] = req.body;
+  res.status(201).json({ msg: "Product Replaced successfully" });
+})
+
+app.patch("/api/products/:id",(req,res) =>{
+  const id  = +req.params.id;
+  const product = config.find (element => element.id === id);
+  product.description
   res.status(201).json({ msg: "Product Updated successfully" });
 })
 
