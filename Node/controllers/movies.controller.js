@@ -1,8 +1,5 @@
-export const movieController = (req, res, next) => {
-    // const user = null;
-    // if (!user) {
-    //     const error = new Error("User not defiened");
-    //     next(error);
-    // }
-    res.status(200).send("Movie movie movie");
-}
+export const movieController = (req,res)=>
+        {
+            console.log("Movie Controller")
+            res.status(200).send("Movie Movie Movie");
+        }
