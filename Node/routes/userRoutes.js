@@ -1,16 +1,20 @@
 import express from "express";
-import {userValidate} from "../utils/userValidate.js"
+import { userValidate } from "../utils/userValidate.js"
+import { isAuthenticated } from "../middleware/auth.js";
+
 const router = express.Router();
 
 const users = [
-    {
-        firstName:"Shresth",
-        lastName:"Rajput",
-        email:"shresth@gmail.com",
-        password:"shresth123"
+    {   
+        userId: "ar12",
+        firstName:"Avinash",
+        lastName:"Ranjan",
+        email:"avinashranjan918@gmail.com",
+        password:"Avinash123"
     }
 ]
 
+//^ login
 
 router.post("/login", (req,res)=>{
     const {email,password} = req.body;
@@ -20,14 +24,11 @@ router.post("/login", (req,res)=>{
    if(!user){
         res.status(404).json({msg:"Invalid User"})
    }
-    res.cookie("token","secret123",{
-                                        httpOnly:true,
-                                        secure:true, 
-                                        maxAge: 60 * 1000
-                                    });
-    res.status(200).send({msg:"Login Successfull"});
+    req.session.user = { emailID: email };
+    res.status(200).send({success: true,msg:"Login Successfull"});
 })
 
+//^ signin
 
 router.post("/signin",(req,res)=>{
     const isValidated = userValidate(req.body);
@@ -38,7 +39,7 @@ router.post("/signin",(req,res)=>{
     res.status(200).send({msg:"Signin Successfull"});
 })
 
-router.get("/profile",(req,res)=>{
+router.get("/profile", isAuthenticated ,(req,res)=>{
     console.log(req.cookies);    
     res.status(200).send({msg:"Profile Page"});
 })

@@ -1,11 +1,9 @@
 import express from 'express';
 import { task1, task2 } from './src/middleware/routeSpecific.middlware.js';
-import { globalMiddleware, globalErrorMiddleware } from './middleware/globalMiddleware.js';
 import { movieController } from './controllers/movies.controller.js';
 import session from 'express-session';
 import userRoutes from "./routes/userRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js";
-
 
 const app = express();
 
@@ -19,8 +17,8 @@ const app = express();
     next();
 })*/
 
-//& route specific midleware
-app.use(globalMiddleware);
+app.use(express.json());
+
 
 //& cookies and session
 app.use(session({
@@ -30,7 +28,11 @@ app.use(session({
     cookie: {
         httpOnly: true,
         maxAge: 60 * 1000,
-        sameSite: 'strict'
+        sameSite: 'lax', //'strict'
+        path: "/",
+        priority: "high",
+        //secure: true //*only use in production
+        
     }
 }))
 
@@ -54,6 +56,6 @@ app.use((err, req, res, next) => {
     res.send(500).send("Something went wrong");
 });
 
-app.use(globalErrorMiddleware);
+// app.use(globalErrorMiddleware);
 
 export default app;
