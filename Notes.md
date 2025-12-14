@@ -15,7 +15,6 @@ If user access the website without credentials and we want to save the session o
 If user visit once at any ecomm website and add 3 products and if they visit again then their fairst data will be saved or not.
 
 ### secret
-    adding just for the streak
 
 
 
