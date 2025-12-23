@@ -1,17 +1,21 @@
-import http from 'http'
-import { sum, pow } from './logic.js';
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import app from "./app.js";
+dotenv.config();
 
-const PORT = 9000;
-
-
-const server = http.createServer((req, res) => {
-    res.end("Hello form server");
-})
+const PORT = process.env.PORT || 4000;
 
 
-const add = sum(3, 4);
-console.log(add);
 
-server.listen(PORT, () => {
-    console.log("Server is running")
-})
+// Databse connection call
+connectDB()
+    
+    
+// Server connection call
+app.listen(PORT, ()=>{
+    console.log(`Server is running: http://localhost:${PORT}`);
+});
+
+
+
+
