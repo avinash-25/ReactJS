@@ -16,6 +16,7 @@ export const registerUser = async (req, res) => {
       return res.status(400).json({success:false,msg:"User Already Exist!!"})
     }
 
+
     const passwordHash = await generateHashPassword(password);
 
     const newUser = new User({
@@ -70,16 +71,17 @@ export const loginUser = async (req, res) => {
               secure:process.env.NODE_ENV === "Production"
             });
             
-          res.cookie("refreshToken",refreshToken,
+          
+        res.cookie("refreshToken", refreshToken,
             {
               httpOnly:true,
               priority:"high",
               secure:process.env.NODE_ENV === "Production"
             });
-
-          return res.status(200).json({
-                        success: true,
-                        msg: "Login Successfull",
+        return res.status(200).json({
+            success: true,
+            msg: "Login Successfull",
+            accessToken,
                       });
         }     
       } 

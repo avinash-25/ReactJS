@@ -4,8 +4,8 @@ import { auth } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/signin", registerUser);
-router.post("/login", loginUser );
+router.post("/register", registerUser);
+router.post("/signin", loginUser);
 router.get("/logout", logoutUser );
 router.get("/profile",auth, getProfile );
 
