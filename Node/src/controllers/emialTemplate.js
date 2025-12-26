@@ -1,22 +1,24 @@
-import nodemailer from 'nodemailer';
-import crypto from 'crypto';
+import nodemailer from "nodemailer";
 
-const transport = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL,
-        password: process.env.EMAIL_PASS
-    }
-})
+export const emailSend = async (to,subject,html) => {
+    const transport = nodemailer.createTransport({
+                service:'gmail',
+                port:465,
+                auth:{
+                    user:process.env.EMAIL,
+                    pass:process.env.EMAIL_PASSWORD
+                }
+            });
 
-const token = crypto.randomBytes
-
-const emailSend = async (from, to, subject, html) => {
-    const template = {
-        from: from,
-        to: to,
-        subject: subject,
-        html: html
-    }
-    await transport.sendMail(template);
+    try{
+       transport.sendMail( {
+                from:process.env.EMAIL,
+                to:to,
+                subject:subject,
+                html:html
+            });
+   }
+   catch(error){
+        console.log("ERROR:"," something went wrong",error)
+   }
 } 

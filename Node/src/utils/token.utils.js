@@ -7,7 +7,7 @@ export const generateAccessToken = ({_id,email},secret)=>{
                email
             },
             secret,
-            {expiresIn: '2m'}
+            {expiresIn: '5m'}
         );
 }
 
@@ -23,5 +23,9 @@ export const generateRefreshToken = ({_id},secret)=>{
 
 
 export const verifyAccessToken = (token,secret) =>{
-    return jwt.verify(token,secret)
+    return jwt.verify(token,secret);
+}
+
+export const verifyRefreshToken = (token,secret) =>{
+    return jwt.verify(token,secret);
 }
