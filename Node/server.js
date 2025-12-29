@@ -13,7 +13,7 @@ await connectDB()
     
 // Server connection call
 app.listen(PORT, ()=>{
-    console.log(`Serve is running: http://localhost:${PORT}`);
+    console.log(`Server is running: http://localhost:${PORT}`);
 });
 
 
