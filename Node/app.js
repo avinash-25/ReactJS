@@ -1,6 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import authRoutes from "./src/routes/auth.routes.js";
+import profileRoutes from './src/routes/profile.routes.js';
 
 
 const app = express();
@@ -9,7 +10,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-
+app.use("/profile", profileRoutes)
 
 export default app;
+
 

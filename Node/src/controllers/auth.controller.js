@@ -1,13 +1,12 @@
 import { User } from '../models/user.model.js';
 import { userValidate } from '../utils/userValidate.utils.js';
 import { verifyPasswordHash, generateHashPassword } from '../utils/passwordValidation.utils.js';
-import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/token.utils.js';
-import { emailSend } from './emialTemplate.js';
-import crypto from "crypto";
+import {generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/token.utils.js';
+import { emailSend } from '../models/email.model.js';
 import { createOtp } from '../utils/otp.utils.js';
+import Role from '../models/roles.model.js';
 
-
-// Register User
+//* Register User
 export const registerUser = async (req, res) => {
   try {
     // 1. check req.body Validation
@@ -22,7 +21,7 @@ export const registerUser = async (req, res) => {
         .status(400)
         .json({ success: false, msg: "User Already Exist!!" });
 
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = createToken();
     console.log("crypto token:", token);
 
     const passwordHash = await generateHashPassword(password);
@@ -53,7 +52,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// Verify Email
+//* Verify Email
 export const verifiyEmail = async (req, res) => {
   try {
     const token = req.params?.token;
@@ -61,7 +60,6 @@ export const verifiyEmail = async (req, res) => {
       verificationToken: token
     });
 
-    console.log(user)
 
     if (!user) {
       return res.json({
@@ -82,19 +80,21 @@ export const verifiyEmail = async (req, res) => {
     }    
 
 
-    console.log("Modification")
+    
     user.emailVerified = true;
-    user.verificationToken = undefined;
-    user.verificationTokenExpires = undefined;
+    user.verificationToken = null;
+    user.verificationTokenExpires = null;
+
+    await User.collection.dropIndex("verificationToken_1");
 
     
       const otp = createOtp();
       user.otp = otp;
       user.otpExpires = Date.now() + 1 * 60 * 1000;
 
-      console.log("Otp creation")
+    
       await user.save();
-    console.log("Db saved")
+ 
       const htmlOTPTemplate = `<h2>OPT for 2FA Verification</h2>
                                 <p>Please mention this otp. 
                                 It is valid only for <strong>2 min</strong></p>
@@ -114,13 +114,13 @@ export const verifiyEmail = async (req, res) => {
   }
 };
 
-//verifyOtp
+//* verifyOtp
 export const verifyOtp = async (req, res) => {
   try {
     const { otp } = req.body;
     const user = await User.findOne({otp});
 
-    console.log(user)
+   
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -163,26 +163,37 @@ export const verifyOtp = async (req, res) => {
   }
 };
 
-// login
+//* login
 export const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
-    // find in db
+    // find role in db
+    const  roleDoc = await Role.findOne({role});
+    console.log("roleDoc:",roleDoc);
+    if(!roleDoc)
+      return res.status(400).json({success: false, msg: "Invalid Role"})
+    
+
+    // find user in db
     const user = await User.findOne({ email });
 
     if (!user) throw new Error("Invalid Credentials..!!");
-
     if (!user.emailVerified) throw new Error("Email is not Verified!!");
-
     const isValidPassword = await verifyPasswordHash(password, user.password);
-    if (!isValidPassword) {
-      throw new Error("Invalid Credentials..!!");
-    } else {
+    if (!isValidPassword) throw new Error("Invalid Credentials..!!");
+    user.role = roleDoc._id; 
       
+    const saved = await user.save();      
+    console.log("saved user:",saved);
+
       //  Generate jwt access token
     const accessToken = generateAccessToken(
-      user,
+      {
+        id:user._id,
+        role: roleDoc._id,
+        permissions: roleDoc.permissions
+      },
       process.env.JWT_SECRET_ACCESS_KEY
     );
 
@@ -204,7 +215,6 @@ export const loginUser = async (req, res) => {
       accessToken: accessToken,
     });
       
-    }
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -214,14 +224,13 @@ export const loginUser = async (req, res) => {
 };
 
 
-// Logout
+//* Logout
 export const logoutUser = (req, res) => {
   res.clearCookie("refreshToken");
   res.json({ success: true, msg: "Logout User" });
 };
 
 
-// -----------------------------------------
 export const getNewAccessToken = async (req, res) => {
   const refreshToken = req.cookies?.refreshToken;
   console.log("refreshToken:", refreshToken);
@@ -246,7 +255,9 @@ export const getNewAccessToken = async (req, res) => {
     }
 
     const newAccessToken = generateAccessToken(
-      user,
+      {
+        id:user._id
+      },
       process.env.JWT_SECRET_ACCESS_KEY
     );
 
@@ -275,6 +286,7 @@ export const getNewAccessToken = async (req, res) => {
   }
 };
 
+//* get profile
 export const getProfile = async (req, res) => {
   console.log(req.user.id);
   const id = req.user.id;

@@ -11,7 +11,7 @@ export const generateAccessToken = ({_id,email},secret)=>{
         );
 }
 
-export const generateRefreshToken = ({_id},secret)=>{
+export const generateRefreshToken = (payload,secret)=>{
 
  return   jwt.sign({
                id:_id               

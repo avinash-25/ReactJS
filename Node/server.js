@@ -1,6 +1,7 @@
 import app from "./app.js";
 import dotenv from "dotenv";
 import { connectDB } from "./src/config/db.js";
+import { addRole } from "./src/config/addRoles.js";
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 4000;
 
 // Databse connection call
 await connectDB()
+await addRole();
     
     
 // Server connection call

@@ -42,6 +42,10 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  role: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Role'
+  }
 });
 
 export const User = mongoose.model("User", userSchema);
