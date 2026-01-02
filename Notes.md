@@ -1,0 +1,2 @@
+- populate : extract data from another collection and save to another collection populate("role", {role, permission}) here role is a name of document where data will be save.
+- and second argument will discribe what we have to show
