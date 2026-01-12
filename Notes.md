@@ -1,2 +1,2 @@
-- For install a react **create react app** --> This is depricated not
+- For install a react **create react app** --> This is depricated
 - 
