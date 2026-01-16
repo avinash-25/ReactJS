@@ -1,35 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { ClassBasedComponent } from "./Topics/01_TypesOfComponent/ClassBasedComponent";
+import { FunctionbasedComponent } from "./Topics/01_TypesOfComponent/FunctionBasedComponent";
+import Dropdown from "./Topics/02_States/DropDown";
+import StateInClassBased from "./Topics/02_States/StatesInClassBased";
+import {StatesInFunctionBased} from "./Topics/02_States/StatesInFunctionBased"
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div>
+            {/* <FunctionbasedComponent/>
+            <ClassBasedComponent /> */}
+            {/* <StatesInFunctionBased/> */}
+            {/* <StateInClassBased/> */}
+            <Dropdown/>
+        </div>
+    )
 }
 
-export default App
+export default App;
