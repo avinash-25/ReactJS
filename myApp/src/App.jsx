@@ -3,6 +3,8 @@ import { FunctionbasedComponent } from "./Topics/01_TypesOfComponent/FunctionBas
 import Dropdown from "./Topics/02_States/DropDown";
 import StateInClassBased from "./Topics/02_States/StatesInClassBased";
 import {StatesInFunctionBased} from "./Topics/02_States/StatesInFunctionBased"
+import PropsParent from "./Topics/03_Props/PropsParent";
+import DrillingParent from "./Topics/04_Props Drilling/DrillingParent";
 
 function App() {
     return (
@@ -11,7 +13,9 @@ function App() {
             <ClassBasedComponent /> */}
             {/* <StatesInFunctionBased/> */}
             {/* <StateInClassBased/> */}
-            <Dropdown/>
+            <PropsParent/>
+            {/* <Dropdown /> */}
+            {/* <DrillingParent/> */}
         </div>
     )
 }
