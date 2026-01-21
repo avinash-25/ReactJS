@@ -1,3 +1,5 @@
+
+import Props from "./Props";
 import { ClassBasedComponent } from "./Topics/01_TypesOfComponent/ClassBasedComponent";
 import { FunctionbasedComponent } from "./Topics/01_TypesOfComponent/FunctionBasedComponent";
 import Dropdown from "./Topics/02_States/DropDown";
@@ -13,9 +15,10 @@ function App() {
             <ClassBasedComponent /> */}
             {/* <StatesInFunctionBased/> */}
             {/* <StateInClassBased/> */}
-            <PropsParent/>
+            {/* <PropsParent/> */}
             {/* <Dropdown /> */}
             {/* <DrillingParent/> */}
+            < Props />
         </div>
     )
 }
