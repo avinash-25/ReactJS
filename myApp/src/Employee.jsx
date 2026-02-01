@@ -4,7 +4,7 @@ const Employee = (props) => {
     let { fullname, skills, designation, salary } = props;
 
     let values = Object.entries(props);
-    console.log(values)
+    // console.log(values)
 
     return (
         <>
