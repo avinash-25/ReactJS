@@ -8,6 +8,7 @@ import {StatesInFunctionBased} from "../../Topics/02_States/StatesInFunctionBase
 import PropsParent from "../../Topics/03_Props/PropsParent";
 import DrillingParent from "../../Topics/04_Props Drilling/DrillingParent";
 import User from "./Topic/map reduce filter/User";
+import Counter from "./Topic-7 useState hook/Couter";
 
 function App() {
     return (
@@ -20,7 +21,8 @@ function App() {
             {/* <Dropdown /> */}
             {/* <DrillingParent/> */}
             {/* < Props /> */}
-            <User/>
+            {/* <User/> */}
+            <Counter/>
         </div>
     )
 }
