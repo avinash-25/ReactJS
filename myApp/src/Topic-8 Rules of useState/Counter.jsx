@@ -25,3 +25,6 @@ const Counter = () => {
 }
 
 export default Counter;
+
+// The above code will throw an error because the useState hook for 'username' is conditionally called inside an if statement.
+// React hooks must be called unconditionally at the top level of the component.

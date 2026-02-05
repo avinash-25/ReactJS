@@ -44,15 +44,14 @@ const User = () => {
     return <ul id="user-component">
             <List  username={persons[0]} />
             <List  username={persons[1]} />
-            <List  username={persons[2]} /> 
-            <List  username={persons[3]} />        
-            <List  username={persons[4]} />        
-           </ul> 
+            <List  username={persons[2]} />
+            <List  username={persons[3]} />
+            <List  username={persons[4]} />
+           </ul>
 }
-     
+
 export default User;
  */
 
 
 
-  
