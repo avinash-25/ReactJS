@@ -1,18 +1,20 @@
-// import Counter from "./Topic-7 useState Hook/Counter";
-import Card from "./Topic - 10 useEffect/Card";
-import Demo from "./Topic -9 useRef hook/Demo";
-import Demo2 from "./Topic -9 useRef hook/Demo2";
-import Demo3 from "./Topic -9 useRef hook/Demo3";
-import Counter from "./Topic-8 Rules of useState/Counter";
+import Card from "./Topic - 12 useEffect Api call and shimmer ui/Card";
+import Container from "./Topic - 12 useEffect Api call and shimmer ui/Container";
+import './index.css';
 
 const App = () => {
+  // const [count,setCount] = useState(0);
+
+  // useEffect(() => {
+  //   console.log("App useEffect");
+  // },[count])
+
+  // console.log("App Render");
+
   return (
-    <div id="app-component">
-      {/* <Counter/> */}
-      {/* <Demo/> */}
-      {/* <Demo2/> */}
-      {/* <Demo3/> */}
-      <Card/>
+    <div>
+      {/* <Card/> */}
+      <Container/>
     </div>
   );
 };

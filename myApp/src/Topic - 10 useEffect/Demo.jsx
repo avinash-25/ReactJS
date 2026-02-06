@@ -1,28 +1,29 @@
-import { useState, useEffect} from 'react'
+import {useState,useEffect} from 'react'
 
 const Demo = () => {
-    const [response, setResponse] = useState([]);
-    console.log("Demo Rendered");
+    const [response, setReponse] = useState([]);
 
-    useEffect(() => {
-        getUsers();
-    },[]);
+    console.log("Demo Render");
+    useEffect(()=>{
+        getUsers()
+    }, [])
 
-    //* API call
+    //* API Call
     const getUsers = async () => {
-        const resp = await fetch("https://api.github.com/users/avinash-25");
+        const resp = await fetch("https://api.github.com/avinash-25");
         const data = await resp.json();
-        setResponse(data);
+        setReponse(data);
     }
 
-//^ Conditional rendering
-    //* Default UI
-    if(response.length === 0) return <> <h2>Default Dummy UI</h2></>
-    return (
-        <>
-            <h2>Original Dummy UI</h2>
-        </>
-    )
+    //* Conditional Rendering
+    if(response.length === 0)
+    {
+        return <div>Default Demo UI</div>
+    }
+
+  return (
+    <div>Original Demo UI</div>
+  )
 }
 
-export default Demo;
+export default Demo
