@@ -21,3 +21,25 @@
 10. Redux toolkit
 11. Zustand
 12. React Testing Library
+
+
+- It maintains the history stack
+- when we navigate from another page then history stack will contains stack like url, state, element name
+- If we use replace{true} then it change the previous state with new one
+
+1. create browser router
+2. <Router Provider router = {} />
+3. useParams()
+4. useSearchParams()
+5. useNavigate()
+6. useLocation()
+7. useRouteError()
+8. useLoaderData()
+9. index Prop
+10. link vs a
+11. Navlink vs link
+12. replace prop
+13. State vs Prop
+14. protected prop
+15. <Navigate/> componenet.
+16. <outlet/>

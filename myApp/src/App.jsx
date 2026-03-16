@@ -1,23 +1,18 @@
-import Card from "./Topic - 12 useEffect Api call and shimmer ui/Card";
-import Container from "./Topic - 12 useEffect Api call and shimmer ui/Container";
-import './index.css';
-import Parent from "./Topic-18 forwardRef HOC/Parent"
+import {Outlet} from "react-router-dom";
+
+import Header from "./Topic-22 useParams/pages/Header";
+import Home from "./Topic-22 useParams/pages/Home";
+import GrandParant from "./Topic-23 Props Drilling/GrandParant";
 
 const App = () => {
-  // const [count,setCount] = useState(0);
-
-  // useEffect(() => {
-  //   console.log("App useEffect");
-  // },[count])
-
-  // console.log("App Render");
-
   return (
-    <div>
-      {/* <Card/> */}
-      {/* <Container/> */}
-      <Parent/>
-    </div>
+    <GrandParant />
+    // <div id="app-component">
+    //   <Header/>
+    //   <main>
+    //     <Outlet/>
+    //   </main>
+    // </div>
   );
 };
 
